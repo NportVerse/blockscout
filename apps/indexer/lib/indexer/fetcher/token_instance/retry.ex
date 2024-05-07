@@ -33,8 +33,7 @@ defmodule Indexer.Fetcher.TokenInstance.Retry do
         initial_acc,
         fn data, acc ->
           reducer.(data, acc)
-        end,
-        true
+        end
       )
 
     acc
@@ -57,7 +56,7 @@ defmodule Indexer.Fetcher.TokenInstance.Retry do
 
   defp defaults do
     [
-      flush_interval: :timer.seconds(3),
+      flush_interval: :timer.minutes(10),
       max_concurrency: Application.get_env(:indexer, __MODULE__)[:concurrency] || @default_max_concurrency,
       max_batch_size: Application.get_env(:indexer, __MODULE__)[:batch_size] || @default_max_batch_size,
       task_supervisor: __MODULE__.TaskSupervisor
